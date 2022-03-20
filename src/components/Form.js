@@ -20,10 +20,10 @@ const Form = (props) => {
     event.preventDefault();
     const form = event.target;
     props.setWord(form.searchBox.value);
-    if (form.Merriam.checked)
-      props.setSource((prevState) => [...prevState, "Merriam"]);
-    if (form.FreeDict.checked)
-      props.setSource((prevState) => [...prevState, "FreeDict"]);
+    props.setSource({
+      Merriam: form.Merriam.checked,
+      FreeDict: form.FreeDict.checked,
+    });
     navigate("/results");
   };
 
@@ -37,7 +37,12 @@ const Form = (props) => {
         placeholder="search word"
       ></StyledTextbox>
       <br />
-      <StyledCheckbox type="checkbox" id="Merriam" name="Merriam" />
+      <StyledCheckbox
+        type="checkbox"
+        id="Merriam"
+        name="Merriam"
+        defaultChecked
+      />
       <StyledLabel htmlFor="Merriam"> Merriam webster</StyledLabel>
       <StyledCheckbox type="checkbox" id="FreeDict" name="FreeDict" />
       <StyledLabel htmlFor="FreeDict"> FreeDict</StyledLabel>

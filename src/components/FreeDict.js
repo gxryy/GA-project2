@@ -19,7 +19,11 @@ const FreeDict = (props) => {
     }
   };
 
-  return <div></div>;
+  return (
+    <div>
+      <h1>This is the return from FreeDict</h1>
+    </div>
+  );
 };
 
 export default FreeDict;
