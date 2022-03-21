@@ -49,24 +49,29 @@ const Merriam = (props) => {
 
     const soundURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audio}.mp3`;
     const pronounciation = filteredData[0].hwi.prs[0].mw;
+
     for (let i = 0; i < filteredData.length; i++) {
+      console.log(`filtered data`);
+      console.log(filteredData[i]);
+      const shortDef = filteredData[i].shortdef.map((element) => {
+        return { definition: element };
+      });
+
       setProcessedArray((prevState) => [
         ...prevState,
         {
           word: filteredData[i].meta.id.split(":")[0],
           entry: filteredData[i].meta.id.split(":")[1],
           wordType: filteredData[i].fl,
-          shortDef: filteredData[i].shortdef,
+          shortDef: shortDef,
           fullDef: filteredData[i].def,
           soundURL: soundURL,
           pronounciation: pronounciation,
-          source: "Merriam Webster",
+          dict: "Merriam Webster",
           id: nanoid(),
         },
       ]);
     }
-
-    // console.log(processedArray);
   };
 
   // Merriam to return the definition card

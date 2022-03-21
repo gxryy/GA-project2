@@ -41,12 +41,20 @@ const InfoContainer = styled.div`
   display: flex;
 `;
 
-const Card = (props) => {
-  // console.log(props.def);
+const Example = styled.p`
+  color: grey;
+  text-align: left;
+`;
 
-  const definitionArray = props.def.shortDef.map((element) => (
-    <Definition key={nanoid()}>{element}</Definition>
-  ));
+const Card = (props) => {
+  const definitionArray = props.def.shortDef.map((element) => {
+    return (
+      <div key={nanoid()}>
+        <Definition key={nanoid()}>{element.definition}</Definition>
+        <Example key={nanoid()}>{element?.example}</Example>
+      </div>
+    );
+  });
 
   return (
     <StyledDiv className="centered">
@@ -57,7 +65,7 @@ const Card = (props) => {
       </InfoContainer>
       <ol type="1">{definitionArray}</ol>
 
-      <Source>Source: {props.def.source}</Source>
+      <Source>Source: {props.def.dict}</Source>
     </StyledDiv>
   );
 };
