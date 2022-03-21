@@ -8,7 +8,12 @@ const Results = (props) => {
 
   // call on merriam component that is expected to return an array of word definations
   if (props.source.Merriam) {
-    merriamList = <Merriam word={props.word} />;
+    merriamList = (
+      <Merriam
+        word={props.word}
+        setSuggestionArray={props.setSuggestionArray}
+      />
+    );
     // console.log(merriamList);
   }
 

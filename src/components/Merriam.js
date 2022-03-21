@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import FetchAPI from "./FetchAPI";
 import Card from "./Card";
 import { nanoid } from "nanoid";
-import fancy_MW from "../mock/fancy_MW";
-import channel_MW from "../mock/channel_MW";
-import overlook_MW from "../mock/overlook_MW";
-import minute_MW from "../mock/minute_MW";
+import { useNavigate } from "react-router-dom";
 
 const Merriam = (props) => {
+  const navigate = useNavigate();
   const [APIdata, setAPIData] = useState("");
   const [processedArray, setProcessedArray] = useState([]);
   const API_KEY = "b4c04852-37ba-4237-a137-d1a1bbddd206";
@@ -16,8 +14,6 @@ const Merriam = (props) => {
   // useEffect to call API upon loading
   useEffect(() => {
     FetchAPI(url, setAPIData);
-    // setAPIData(channel_MW);
-    // console.log(channel_MW);
 
     return () => {
       console.log(`cleanup code: component`);
@@ -30,8 +26,11 @@ const Merriam = (props) => {
   }, [APIdata]);
 
   const processData = () => {
-    // const mockWord = "channel";
-    console.log(APIdata);
+    if (typeof APIdata[0] == "string") {
+      props.setSuggestionArray(APIdata);
+      navigate("/suggest");
+      return;
+    }
 
     let filteredData = APIdata.filter(
       (element) => element.meta.id.split(":")[0] === props.word
@@ -87,7 +86,7 @@ const Merriam = (props) => {
   // Merriam to return the definition card
   return (
     <div>
-      <h1>Merriam: {props.word}</h1>
+      <h1>merriam: </h1>
       {processedArray.map((element) => {
         return <Card def={element} key={element.id} />;
       })}
