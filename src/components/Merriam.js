@@ -15,9 +15,9 @@ const Merriam = (props) => {
 
   // useEffect to call API upon loading
   useEffect(() => {
-    // FetchAPI(url, setAPIData);
-    setAPIData(channel_MW);
-    console.log(channel_MW);
+    FetchAPI(url, setAPIData);
+    // setAPIData(channel_MW);
+    // console.log(channel_MW);
 
     return () => {
       console.log(`cleanup code: component`);
@@ -30,10 +30,11 @@ const Merriam = (props) => {
   }, [APIdata]);
 
   const processData = () => {
-    const mockWord = "channel";
+    // const mockWord = "channel";
+    // console.log(APIdata);
 
     const filteredData = APIdata.filter(
-      (element) => element.meta.id.split(":")[0] === mockWord
+      (element) => element.meta.id.split(":")[0] === props.word
     );
     // console.log(filteredData);
 
@@ -65,7 +66,7 @@ const Merriam = (props) => {
       ]);
     }
 
-    console.log(processedArray);
+    // console.log(processedArray);
   };
 
   // Merriam to return the definition card
