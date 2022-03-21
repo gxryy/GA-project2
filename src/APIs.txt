@@ -25,3 +25,8 @@ Word API
 Key: 98d89e5ea4msh877d51fa690f1e7p170730jsnf7d5c85600cb
 Documentation: https://rapidapi.com/dpventures/api/wordsapi/
 
+
+Wordnik 
+key: de46aea2a06a6bd33572d005afc01f025e0a2875bc6a089e8
+d6g3f2fds6732r7sdf6d7ds6sd5gd67cvb5vc6237dfs
+85b993ddaabe04346e0090d379b02d18ad04bda75d4e0ecca

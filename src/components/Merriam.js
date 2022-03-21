@@ -31,24 +31,34 @@ const Merriam = (props) => {
 
   const processData = () => {
     // const mockWord = "channel";
-    // console.log(APIdata);
+    console.log(APIdata);
 
-    const filteredData = APIdata.filter(
+    let filteredData = APIdata.filter(
       (element) => element.meta.id.split(":")[0] === props.word
     );
+
+    if (filteredData.length == 0) filteredData[0] = APIdata[0];
     // console.log(filteredData);
+    let soundURL = "";
+    let pronounciation = "";
 
-    const soundObj = filteredData[0].hwi.prs[0].sound;
-    const audio = soundObj.audio;
+    if (filteredData[0].hwi.prs) {
+      const soundObj = filteredData[0].hwi.prs[0].sound;
+      const audio = soundObj.audio;
 
-    let subdirectory = "";
-    if (audio.startsWith("bix")) subdirectory = "bix";
-    else if (audio.startsWith("gg")) subdirectory = "gg";
-    else if (audio.match(/^(\W|_|[0-9])/g)) subdirectory = "number";
-    else subdirectory = audio.split("")[0];
+      let subdirectory = "";
 
-    const soundURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audio}.mp3`;
-    const pronounciation = filteredData[0].hwi.prs[0].mw;
+      if (audio.startsWith("bix")) subdirectory = "bix";
+      else if (audio.startsWith("gg")) subdirectory = "gg";
+      else if (audio.match(/^(\W|_|[0-9])/g)) subdirectory = "number";
+      else subdirectory = audio.split("")[0];
+
+      soundURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audio}.mp3`;
+      pronounciation = filteredData[0].hwi.prs[0].mw;
+    } else {
+      soundURL = "";
+      pronounciation = "";
+    }
 
     for (let i = 0; i < filteredData.length; i++) {
       console.log(`filtered data`);
