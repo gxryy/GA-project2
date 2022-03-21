@@ -8,10 +8,9 @@ import minute_MW from "../mock/minute_MW";
 
 const Merriam = (props) => {
   const [APIdata, setAPIData] = useState("");
-  const processedArray = [];
+  const [processedArray, setProcessedArray] = useState([]);
   const API_KEY = "b4c04852-37ba-4237-a137-d1a1bbddd206";
   const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${props.word}?key=${API_KEY}`;
-  // let display = [];
 
   // useEffect to call API upon loading
   useEffect(() => {
@@ -48,14 +47,18 @@ const Merriam = (props) => {
     const soundURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audio}.mp3`;
 
     for (let i = 0; i < filteredData.length; i++) {
-      processedArray.push({
-        word: filteredData[i].meta.id.split(":")[0],
-        entry: filteredData[i].meta.id.split(":")[1],
-        wordType: filteredData[i].fl,
-        shortDef: filteredData[i].shortdef,
-        soundURL: soundURL,
-      });
+      setProcessedArray((prevState) => [
+        ...prevState,
+        {
+          word: filteredData[i].meta.id.split(":")[0],
+          entry: filteredData[i].meta.id.split(":")[1],
+          wordType: filteredData[i].fl,
+          shortDef: filteredData[i].shortdef,
+          soundURL: soundURL,
+        },
+      ]);
     }
+
     console.log(processedArray);
 
     // card should take in word, word type , shortDef, fullDef, pronounciation
@@ -65,8 +68,9 @@ const Merriam = (props) => {
   return (
     <div>
       <h1>This is the return from merriam</h1>
-
-      {/* <Card /> */}
+      {processedArray.map((element) => {
+        return <Card def={element} />;
+      })}
     </div>
   );
 };
