@@ -17,9 +17,8 @@ const Results = (props) => {
   }
 
   return (
-    <div>
+    <div id="resultsPage">
       <h1>This is the results page</h1>
-
       {merriamList}
       {freeDictList}
     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FetchAPI from "./FetchAPI";
 import Card from "./Card";
+import { nanoid } from "nanoid";
 import fancy_MW from "../mock/fancy_MW";
 import channel_MW from "../mock/channel_MW";
 import overlook_MW from "../mock/overlook_MW";
@@ -16,6 +17,7 @@ const Merriam = (props) => {
   useEffect(() => {
     // FetchAPI(url, setAPIData);
     setAPIData(channel_MW);
+    console.log(channel_MW);
 
     return () => {
       console.log(`cleanup code: component`);
@@ -45,7 +47,7 @@ const Merriam = (props) => {
     else subdirectory = audio.split("")[0];
 
     const soundURL = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${audio}.mp3`;
-
+    const pronounciation = filteredData[0].hwi.prs[0].mw;
     for (let i = 0; i < filteredData.length; i++) {
       setProcessedArray((prevState) => [
         ...prevState,
@@ -54,22 +56,24 @@ const Merriam = (props) => {
           entry: filteredData[i].meta.id.split(":")[1],
           wordType: filteredData[i].fl,
           shortDef: filteredData[i].shortdef,
+          fullDef: filteredData[i].def,
           soundURL: soundURL,
+          pronounciation: pronounciation,
+          source: "Merriam Webster",
+          id: nanoid(),
         },
       ]);
     }
 
     console.log(processedArray);
-
-    // card should take in word, word type , shortDef, fullDef, pronounciation
   };
 
   // Merriam to return the definition card
   return (
     <div>
-      <h1>This is the return from merriam</h1>
+      <h1>Merriam: {props.word}</h1>
       {processedArray.map((element) => {
-        return <Card def={element} />;
+        return <Card def={element} key={element.id} />;
       })}
     </div>
   );
