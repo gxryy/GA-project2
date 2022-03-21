@@ -3,12 +3,13 @@ import FetchAPI from "./FetchAPI";
 import Card from "./Card";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
+import keys from "../keys";
 
 const Merriam = (props) => {
   const navigate = useNavigate();
   const [APIdata, setAPIData] = useState("");
   const [processedArray, setProcessedArray] = useState([]);
-  const API_KEY = "b4c04852-37ba-4237-a137-d1a1bbddd206";
+  const API_KEY = keys.MW;
   const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${props.word}?key=${API_KEY}`;
 
   // useEffect to call API upon loading
