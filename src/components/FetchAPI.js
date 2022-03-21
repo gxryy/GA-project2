@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 
-const FetchAPI = async (url, setData) => {
-  // useEffect(async () => {
+const FetchAPI = async (url, param, setData) => {
   try {
     console.log(`fetching API`);
-    const response = await fetch(url);
+    const response = await fetch(url, param);
     if (response.status !== 200) {
       throw new Error("Something went wrong.");
     }
@@ -14,7 +13,6 @@ const FetchAPI = async (url, setData) => {
   } catch (err) {
     console.log(err);
   }
-  // }, []);
 };
 
 export default FetchAPI;

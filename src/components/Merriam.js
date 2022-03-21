@@ -6,48 +6,54 @@ import { useNavigate } from "react-router-dom";
 import keys from "../keys";
 
 const Merriam = (props) => {
-  const navigate = useNavigate();
-  const [APIdata, setAPIData] = useState("");
-  const [processedArray, setProcessedArray] = useState([]);
-  const API_KEY = keys.MW;
-  const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${props.word}?key=${API_KEY}`;
+  const navigate = useNavigate(); // for redirecting to suggestion route
+  const [APIdata, setAPIData] = useState(""); // state to store JSON parsed API data. only used by FetchAPI function
+  const [processedArray, setProcessedArray] = useState([]); // State to store processed API data for ensure consistent format for Card component
 
-  // useEffect to call API upon loading
+  // initiate API parameters on page load.
   useEffect(() => {
-    FetchAPI(url, setAPIData);
+    const API_KEY = keys.MW;
+    const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${props.word}?key=${API_KEY}`;
+    FetchAPI(url, {}, setAPIData); //custom function that takes in url, fetch params, and lifting method.
 
     return () => {
       console.log(`cleanup code: component`);
     };
   }, []);
 
-  // useEffect to process data it is returned
+  // initiate processData function upon APIdata state change
   useEffect(() => {
     if (APIdata) processData();
   }, [APIdata]);
 
+  // function to destructure APIdata, process and parse required information to ensure consistent format with Card component.
+  // processed information is stored in processedArray
   const processData = () => {
+    // Merriam returns an array of strings instead of objects when there is a slight mismatch in query text.
+    // Upon receiving text array, set the lift the suggestion array and redirect to suggestion page.
     if (typeof APIdata[0] == "string") {
       props.setSuggestionArray(APIdata);
       navigate("/suggest");
       return;
     }
 
+    // Filtering to remove irrelevent results returned from Merriam. Matches the result words to the queried word.
     let filteredData = APIdata.filter(
-      (element) => element.meta.id.split(":")[0] === props.word
+      (element) => element.meta.id.split(":")[0] == props.word
     );
 
+    // allow 1 result if the filtering yields no results.
     if (filteredData.length == 0) filteredData[0] = APIdata[0];
-    // console.log(filteredData);
+
     let soundURL = "";
     let pronounciation = "";
-
+    // API object schema
     if (filteredData[0].hwi.prs) {
       const soundObj = filteredData[0].hwi.prs[0].sound;
       const audio = soundObj.audio;
 
+      // subdirectory requirements based on Merriam API. Refer to documentation
       let subdirectory = "";
-
       if (audio.startsWith("bix")) subdirectory = "bix";
       else if (audio.startsWith("gg")) subdirectory = "gg";
       else if (audio.match(/^(\W|_|[0-9])/g)) subdirectory = "number";
@@ -60,9 +66,9 @@ const Merriam = (props) => {
       pronounciation = "";
     }
 
+    // parsing filtered data, and setting processed array state. Refer to API documentation and Card requirements.
     for (let i = 0; i < filteredData.length; i++) {
-      console.log(`filtered data`);
-      console.log(filteredData[i]);
+      // shortDef to be an array of objects consisting of definition
       const shortDef = filteredData[i].shortdef.map((element) => {
         return { definition: element };
       });
@@ -71,10 +77,8 @@ const Merriam = (props) => {
         ...prevState,
         {
           word: filteredData[i].meta.id.split(":")[0],
-          entry: filteredData[i].meta.id.split(":")[1],
           wordType: filteredData[i].fl,
           shortDef: shortDef,
-          fullDef: filteredData[i].def,
           soundURL: soundURL,
           pronounciation: pronounciation,
           dict: "Merriam Webster",
@@ -84,7 +88,6 @@ const Merriam = (props) => {
     }
   };
 
-  // Merriam to return the definition card
   return (
     <div>
       <h1>merriam: </h1>

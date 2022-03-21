@@ -2,15 +2,24 @@ import React, { useEffect, useState } from "react";
 import FetchAPI from "./FetchAPI";
 import Card from "./Card";
 import { nanoid } from "nanoid";
+import keys from "../keys";
 
 // similar structure to Merriam.js. Refer to Merriam.js
-const FreeDict = (props) => {
+const WordAPI = (props) => {
   const [APIdata, setAPIData] = useState("");
   const [processedArray, setProcessedArray] = useState([]);
 
   useEffect(() => {
-    const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${props.word}`;
-    FetchAPI(url, {}, setAPIData);
+    const API_KEY = keys.WordAPI;
+    const url = `https://wordsapiv1.p.rapidapi.com/words/${props.word}`;
+    const params = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+        "x-rapidapi-key": API_KEY,
+      },
+    };
+    FetchAPI(url, params, setAPIData);
 
     return () => {
       console.log(`cleanup code: component`);
@@ -22,16 +31,17 @@ const FreeDict = (props) => {
   }, [APIdata]);
 
   const processData = () => {
-    for (let i = 0; i < APIdata.length; i++) {
+    let shortdef = [];
+
+    for (let i = 0; i < APIdata.results.length; i++) {
       setProcessedArray((prevState) => [
         ...prevState,
         {
-          word: APIdata[i].word,
-          wordType: APIdata[i].meanings[0].partOfSpeech,
-          shortDef: APIdata[i].meanings[0].definitions,
-          soundURL: APIdata[i].phonetics[0].audio,
-          pronounciation: APIdata[i].phonetics[0].text,
-          dict: "Free Dictionary",
+          word: APIdata.word,
+          entry: i + 1,
+          wordType: APIdata.results[i].partOfSpeech,
+          shortDef: [{ definition: APIdata.results[i].definition }],
+          dict: "Word API",
           id: nanoid(),
         },
       ]);
@@ -40,7 +50,7 @@ const FreeDict = (props) => {
 
   return (
     <div>
-      <h1>This is the return from FreeDict</h1>
+      <h1>This is the return from Word API</h1>
       {processedArray.map((element) => {
         return <Card def={element} key={element.id} />;
       })}
@@ -48,4 +58,4 @@ const FreeDict = (props) => {
   );
 };
 
-export default FreeDict;
+export default WordAPI;

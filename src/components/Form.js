@@ -23,6 +23,7 @@ const Form = (props) => {
     props.setSource({
       Merriam: form.Merriam.checked,
       FreeDict: form.FreeDict.checked,
+      WordAPI: form.WordAPI.checked,
     });
     navigate("/results");
   };
@@ -46,6 +47,8 @@ const Form = (props) => {
       <StyledLabel htmlFor="Merriam"> Merriam webster</StyledLabel>
       <StyledCheckbox type="checkbox" id="FreeDict" name="FreeDict" />
       <StyledLabel htmlFor="FreeDict"> FreeDict</StyledLabel>
+      <StyledCheckbox type="checkbox" id="WordAPI" name="WordAPI" />
+      <StyledLabel htmlFor="WordAPI"> WordAPI</StyledLabel>
       <input type="submit"></input>
     </form>
   );

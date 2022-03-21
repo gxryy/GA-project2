@@ -45,8 +45,17 @@ const Example = styled.p`
   color: grey;
   text-align: left;
 `;
+//Card components takes in a prop called def, an object with the information required to display each card
+// def= {
+// word: a string of the word
+// wordType: string of wordtype
+// shortDef: an array of objects with definition and example(optional) as key [{definition: first definition },{definition: second definition, example: second example }]
+// dict: string of source
+// }
 
 const Card = (props) => {
+  // definitionArray is an array that consist of react elements. Each array element contains a definition element and optionally an example element.
+  // definitionArray is obtained by mapping shortDef and returning the definition and example elements respectively.
   const definitionArray = props.def.shortDef.map((element) => {
     return (
       <div key={nanoid()}>
@@ -69,5 +78,8 @@ const Card = (props) => {
     </StyledDiv>
   );
 };
+//InfoContainer contains the Word, wordtype and button to add to myword
+//displays list of definitions as an ordered list starting from 1.
+// Source to indicate source of definition.
 
 export default Card;
