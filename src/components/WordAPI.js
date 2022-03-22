@@ -3,6 +3,14 @@ import FetchAPI from "./FetchAPI";
 import Card from "./Card";
 import { nanoid } from "nanoid";
 import keys from "../keys";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Grid,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 // similar structure to Merriam.js. Refer to Merriam.js
 const WordAPI = (props) => {
@@ -51,14 +59,27 @@ const WordAPI = (props) => {
   };
 
   return (
-    <div>
-      <h3>Word API</h3>
+    <>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Word API</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Grid container spacing={2}>
+            {processedArray.map((element) => {
+              return <Card def={element} key={element.id} />;
+            })}
+          </Grid>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* <h3>Word API</h3>
       <div className="defineCardContainer">
         {processedArray.map((element) => {
           return <Card def={element} key={element.id} />;
         })}
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 };
 

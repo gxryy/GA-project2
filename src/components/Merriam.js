@@ -4,6 +4,14 @@ import Card from "./Card";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import keys from "../keys";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Grid,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const Merriam = (props) => {
   const navigate = useNavigate(); // for redirecting to suggestion route
@@ -97,14 +105,27 @@ const Merriam = (props) => {
   };
 
   return (
-    <div>
-      <h3>Merriam </h3>
+    <>
+      <Accordion defaultExpanded>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Merriam Webster</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Grid container spacing={2}>
+            {processedArray.map((element) => {
+              return <Card def={element} key={element.id} />;
+            })}
+          </Grid>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* <h3>Merriam </h3>
       <div className="defineCardContainer">
         {processedArray.map((element) => {
           return <Card def={element} key={element.id} />;
         })}
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 };
 

@@ -62,7 +62,7 @@ const Results = (props) => {
           )}
         </Stack>
       </Container>
-      <Container>
+      <Container maxWidth="xl">
         {merriamList}
         {freeDictList}
         {WordAPIList}
