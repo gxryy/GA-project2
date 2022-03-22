@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   Container,
   TextField,
+  Typography,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -28,6 +29,8 @@ const Form = (props) => {
   return (
     <form onSubmit={submitHandler}>
       <Container maxWidth="sm">
+        <Typography variant="h1">Define..</Typography>
+
         <TextField
           fullWidth
           autoFocus

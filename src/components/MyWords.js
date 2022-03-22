@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import CardCreator from "./CardCreator";
+import { Container, Grid, Typography } from "@mui/material";
 
 const MyWords = () => {
   //get array from local storage and display
@@ -14,20 +15,27 @@ const MyWords = () => {
   };
 
   return (
-    <div>
-      <h1> this is the my words component</h1>
-      <div>
-        {localWords.map((element) => {
-          return (
-            <CardCreator
-              def={element}
-              key={nanoid()}
-              removeHandler={removeHandler}
-            />
-          );
-        })}
-      </div>
-    </div>
+    <>
+      <Container maxWidth="xl">
+        <Typography variant="h1">My Words</Typography>
+        <Grid
+          container
+          spacing={1}
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          {localWords.map((element) => {
+            return (
+              <CardCreator
+                def={element}
+                key={nanoid()}
+                removeHandler={removeHandler}
+              />
+            );
+          })}
+        </Grid>
+      </Container>
+    </>
   );
 };
 
