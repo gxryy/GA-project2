@@ -30,8 +30,8 @@ const FreeDict = (props) => {
           word: APIdata[i].word,
           wordType: APIdata[i].meanings[0].partOfSpeech,
           shortDef: APIdata[i].meanings[0].definitions,
-          soundURL: APIdata[i].phonetics[0].audio,
-          pronounciation: APIdata[i].phonetics[0].text,
+          // soundURL: APIdata[i].phonetics[0]?.audio,
+          // pronounciation: APIdata[i].phonetics[0]?.text,
           fullDef: APIdata[i].sourceUrls[0],
           dict: "Free Dictionary",
           id: nanoid(),
@@ -43,7 +43,7 @@ const FreeDict = (props) => {
   return (
     <div>
       <h3>FreeDict</h3>
-      <div className="</div>">
+      <div className="defineCardContainer">
         {processedArray.map((element) => {
           return <Card def={element} key={element.id} />;
         })}

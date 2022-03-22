@@ -1,17 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
-const StyledLabel = styled.label`
-  margin: 0.5em 1em 0.5em 0.5em;
-`;
-const StyledTextbox = styled.input`
-  margin: 0.5em;
-  width: 30%;
-`;
-const StyledCheckbox = styled.input`
-  margin: 0.5em;
-`;
+import {
+  Button,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  Container,
+  TextField,
+} from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Form = (props) => {
   const navigate = useNavigate();
@@ -30,26 +27,46 @@ const Form = (props) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <StyledLabel htmlFor="searchBox">Search Here:</StyledLabel>
-      <StyledTextbox
-        type="text"
-        name="searchBox"
-        id="searchBox"
-        placeholder="search word"
-      ></StyledTextbox>
-      <br />
-      <StyledCheckbox
-        type="checkbox"
-        id="Merriam"
-        name="Merriam"
-        defaultChecked
-      />
-      <StyledLabel htmlFor="Merriam"> Merriam webster</StyledLabel>
-      <StyledCheckbox type="checkbox" id="FreeDict" name="FreeDict" />
-      <StyledLabel htmlFor="FreeDict"> FreeDict</StyledLabel>
-      <StyledCheckbox type="checkbox" id="WordAPI" name="WordAPI" />
-      <StyledLabel htmlFor="WordAPI"> WordAPI</StyledLabel>
-      <input type="submit"></input>
+      <Container maxWidth="sm">
+        <TextField
+          fullWidth
+          autoFocus
+          id="searchBox"
+          label="Search for..."
+          variant="outlined"
+          size="medium"
+          margin="normal"
+        ></TextField>
+
+        <FormGroup sx={{ marginBottom: "2em" }}>
+          <Container>
+            <FormControlLabel
+              control={<Checkbox defaultChecked id="Merriam" />}
+              labelPlacement="bottom"
+              label="Merriam webster"
+            />
+            <FormControlLabel
+              control={<Checkbox id="FreeDict" />}
+              labelPlacement="bottom"
+              label="FreeDict"
+            />
+            <FormControlLabel
+              control={<Checkbox id="WordAPI" />}
+              labelPlacement="bottom"
+              label="Word API"
+            />
+          </Container>
+        </FormGroup>
+        <Button
+          type="submit"
+          variant="contained"
+          size="large"
+          color="primary"
+          endIcon={<ArrowForwardIosIcon />}
+        >
+          Define
+        </Button>
+      </Container>
     </form>
   );
 };

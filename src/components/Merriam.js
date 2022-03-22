@@ -99,7 +99,7 @@ const Merriam = (props) => {
   return (
     <div>
       <h3>Merriam </h3>
-      <div className="</div>">
+      <div className="defineCardContainer">
         {processedArray.map((element) => {
           return <Card def={element} key={element.id} />;
         })}
