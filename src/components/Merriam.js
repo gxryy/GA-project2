@@ -123,13 +123,6 @@ const Merriam = (props) => {
           </Grid>
         </AccordionDetails>
       </Accordion>
-
-      {/* <h3>Merriam </h3>
-      <div className="defineCardContainer">
-        {processedArray.map((element) => {
-          return <Card def={element} key={element.id} />;
-        })}
-      </div> */}
     </>
   );
 };

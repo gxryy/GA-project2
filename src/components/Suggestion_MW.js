@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styledComponents from "styled-components";
+import { Typography } from "@mui/material";
 
 const Suggestion_MW = (props) => {
   const navigate = useNavigate();
@@ -18,12 +19,12 @@ const Suggestion_MW = (props) => {
 
   return (
     <>
-      <h1>Did you mean...</h1>
+      <Typography variant="h1">Did you mean...</Typography>
       {props.suggestionArray.map((element) => {
         return (
-          <h4 onClick={clickHandler} key={Math.random()}>
+          <Typography onClick={clickHandler} key={Math.random()} variant="h2">
             {element}
-          </h4>
+          </Typography>
         );
       })}
     </>

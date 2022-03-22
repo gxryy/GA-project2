@@ -36,7 +36,10 @@ const WordAPI = (props) => {
 
   useEffect(() => {
     if (APIdata) processData();
-    else console.log(`no data from Word API`);
+    else {
+      console.log(`no data from Word API`);
+      return;
+    }
   }, [APIdata]);
 
   const processData = () => {
@@ -55,34 +58,32 @@ const WordAPI = (props) => {
         },
       ]);
     }
+
+    console.log(processedArray.length);
+    if (processedArray.length == 0) return;
   };
 
   return (
     <>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Word API</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid
-            container
-            spacing={5}
-            justifyContent="space-evenly"
-            alignItems="center"
-          >
-            {processedArray.map((element) => {
-              return <CardCreator def={element} key={element.id} />;
-            })}
-          </Grid>
-        </AccordionDetails>
-      </Accordion>
-
-      {/* <h3>Word API</h3>
-      <div className="defineCardContainer">
-        {processedArray.map((element) => {
-          return <Card def={element} key={element.id} />;
-        })}
-      </div> */}
+      {processedArray.length > 0 && (
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>Word API</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid
+              container
+              spacing={5}
+              justifyContent="space-evenly"
+              alignItems="center"
+            >
+              {processedArray.map((element) => {
+                return <CardCreator def={element} key={element.id} />;
+              })}
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
+      )}
     </>
   );
 };

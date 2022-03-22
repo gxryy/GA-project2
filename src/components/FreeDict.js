@@ -27,7 +27,10 @@ const FreeDict = (props) => {
 
   useEffect(() => {
     if (APIdata) processData();
-    else console.log(`no data from freeDict`);
+    else {
+      console.log(`no data from freeDict`);
+      return;
+    }
   }, [APIdata]);
 
   const processData = () => {
@@ -46,34 +49,30 @@ const FreeDict = (props) => {
         },
       ]);
     }
+    if (processedArray.length == 0) return;
   };
 
   return (
     <>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Free Dict</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Grid
-            container
-            spacing={5}
-            justifyContent="space-evenly"
-            alignItems="center"
-          >
-            {processedArray.map((element) => {
-              return <CardCreator def={element} key={element.id} />;
-            })}
-          </Grid>
-        </AccordionDetails>
-      </Accordion>
-
-      {/* <h3>FreeDict</h3>
-      <div className="defineCardContainer">
-        {processedArray.map((element) => {
-          return <Card def={element} key={element.id} />;
-        })}
-      </div> */}
+      {processedArray.length > 0 && (
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>Free Dict</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid
+              container
+              spacing={5}
+              justifyContent="space-evenly"
+              alignItems="center"
+            >
+              {processedArray.map((element) => {
+                return <CardCreator def={element} key={element.id} />;
+              })}
+            </Grid>
+          </AccordionDetails>
+        </Accordion>
+      )}
     </>
   );
 };
