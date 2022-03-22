@@ -45,7 +45,11 @@ const Merriam = (props) => {
     // allow 1 result if the filtering yields no results.
     if (filteredData.length == 0) filteredData[0] = APIdata[0];
 
-    console.log(APIdata);
+    if (!filteredData[0]) {
+      console.log(`no results`);
+      return;
+    }
+
     let soundURL = "";
     let pronounciation = "";
     // API object schema

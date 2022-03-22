@@ -27,7 +27,9 @@ const WordAPI = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log(APIdata);
     if (APIdata) processData();
+    else console.log(`no data from Word API`);
   }, [APIdata]);
 
   const processData = () => {

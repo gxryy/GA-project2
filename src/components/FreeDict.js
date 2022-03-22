@@ -19,6 +19,7 @@ const FreeDict = (props) => {
 
   useEffect(() => {
     if (APIdata) processData();
+    else console.log(`no data from freeDict`);
   }, [APIdata]);
 
   const processData = () => {
