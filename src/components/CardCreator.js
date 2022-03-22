@@ -67,11 +67,7 @@ const CardCreator = (props) => {
       <Grid item>
         <Card sx={{ minWidth: 350, maxWidth: 800 }} variant="outlined">
           <CardContent>
-            <Typography
-              variant="h3"
-              component="div"
-              onClick={definitionHandler}
-            >
+            <Typography variant="h3" component="div">
               {props.def.word}
             </Typography>
             <Typography sx={{ mb: 1.5 }} variant="h5" color="text.secondary">
@@ -82,7 +78,7 @@ const CardCreator = (props) => {
               Source: {props.def.dict}
             </Typography>
           </CardContent>
-          <CardActions>
+          <CardActions style={{ justifyContent: "center" }}>
             {props.removeHandler ? (
               <Button
                 size="large"
@@ -99,6 +95,15 @@ const CardCreator = (props) => {
                 disabled={buttonState}
               >
                 Add to My Words
+              </Button>
+            )}
+            {props.def.fullDef && (
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={definitionHandler}
+              >
+                Learn More
               </Button>
             )}
           </CardActions>
