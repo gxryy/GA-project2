@@ -2,3 +2,13 @@
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
 }
+
+.myword {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.defineCardContainer {
+  display: flex;
+  flex-wrap: wrap;
+}

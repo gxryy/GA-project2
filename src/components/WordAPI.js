@@ -51,9 +51,11 @@ const WordAPI = (props) => {
   return (
     <div>
       <h3>Word API</h3>
-      {processedArray.map((element) => {
-        return <Card def={element} key={element.id} />;
-      })}
+      <div className="defineCardContainer">
+        {processedArray.map((element) => {
+          return <Card def={element} key={element.id} />;
+        })}
+      </div>
     </div>
   );
 };

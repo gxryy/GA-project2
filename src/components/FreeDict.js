@@ -42,9 +42,11 @@ const FreeDict = (props) => {
   return (
     <div>
       <h3>FreeDict</h3>
-      {processedArray.map((element) => {
-        return <Card def={element} key={element.id} />;
-      })}
+      <div className="</div>">
+        {processedArray.map((element) => {
+          return <Card def={element} key={element.id} />;
+        })}
+      </div>
     </div>
   );
 };

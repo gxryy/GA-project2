@@ -61,10 +61,11 @@ const Results = (props) => {
         <Phonetics>{phonetics.pronounciation}</Phonetics>
         <input type="button" value="Sound" onClick={playSound} />
       </Header>
-
-      {merriamList}
-      {freeDictList}
-      {WordAPIList}
+      <div className="defineCardContainer">
+        {merriamList}
+        {freeDictList}
+        {WordAPIList}
+      </div>
     </div>
   );
 };

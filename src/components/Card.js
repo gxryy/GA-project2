@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 const StyledDiv = styled.div`
   background: beige;
   border-radius: 2em;
-  width: 80%;
+  width: 40%;
   margin: 1em auto;
   padding: 1em 3em 0em 3em;
 `;
@@ -52,6 +52,7 @@ const Example = styled.p`
 // shortDef: an array of objects with definition and example(optional) as key [{definition: first definition },{definition: second definition, example: second example }]
 // dict: string of source
 // fullDef URL: string of the url for full definition
+// id: string as identifier
 // }
 
 const Card = (props) => {
@@ -72,15 +73,37 @@ const Card = (props) => {
   };
 
   const addHandler = (event) => {
-    console.log(props.def);
+    // get local storage
+    // push to local storage
+    console.log(localStorage.getItem("myWords"));
+
+    const localMyWords = localStorage.getItem("myWords");
+    if (!localMyWords) {
+      localStorage.setItem("myWords", JSON.stringify([props.def]));
+      console.log(`no local storage. created mywords`);
+    } else {
+      console.log(`there is existing`);
+      const parsedLocal = JSON.parse(localMyWords);
+      parsedLocal.push(props.def);
+      localStorage.setItem("myWords", JSON.stringify(parsedLocal));
+      console.log(`added`);
+    }
   };
 
   return (
-    <StyledDiv className="centered" onClick={definitionHandler}>
+    <StyledDiv>
       <InfoContainer>
-        <Word> {props.def.word}</Word>
+        <Word onClick={definitionHandler}> {props.def.word}</Word>
         <WordType>{props.def.wordType}</WordType>
-        <input type="button" value="Add to my words" onClick={addHandler} />
+        {props.removeHandler ? (
+          <input
+            type="button"
+            value="Remove"
+            onClick={() => props.removeHandler(props.def)}
+          />
+        ) : (
+          <input type="button" value="Add to my words" onClick={addHandler} />
+        )}
       </InfoContainer>
       <ol type="1">{definitionArray}</ol>
 
