@@ -2,18 +2,8 @@ import React, { useState } from "react";
 import Merriam from "./Merriam";
 import FreeDict from "./FreeDict";
 import WordAPI from "./WordAPI";
-import styled from "styled-components";
-
-const Header = styled.div`
-  background: lightblue;
-`;
-const Word = styled.h1`
-  font-size: 4em;
-`;
-
-const Phonetics = styled.h2`
-  font-size: 2em;
-`;
+import { Typography, Container, Stack } from "@mui/material";
+import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
 
 const Results = (props) => {
   const [phonetics, setPhonetics] = useState({});
@@ -55,18 +45,27 @@ const Results = (props) => {
   };
 
   return (
-    <div id="resultsPage">
-      <Header>
-        <Word>{props.word}</Word>
-        <Phonetics>{phonetics.pronounciation}</Phonetics>
-        <input type="button" value="Sound" onClick={playSound} />
-      </Header>
-      <div className="defineCardContainer">
+    <>
+      <Container>
+        <Stack
+          direction="row"
+          justifyContent="space-around"
+          spacing={10}
+          alignItems="baseline"
+        >
+          <Typography variant="h1" sx={{ fontWeight: "500" }}>
+            {props.word}
+          </Typography>
+          <Typography variant="h3"> {phonetics.pronounciation}</Typography>
+          <VolumeUpRoundedIcon onClick={playSound} fontSize="large" />
+        </Stack>
+      </Container>
+      <Container>
         {merriamList}
         {freeDictList}
         {WordAPIList}
-      </div>
-    </div>
+      </Container>
+    </>
   );
 };
 

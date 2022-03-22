@@ -46,12 +46,12 @@ const Form = (props) => {
               label="Merriam webster"
             />
             <FormControlLabel
-              control={<Checkbox id="FreeDict" />}
+              control={<Checkbox defaultChecked id="FreeDict" />}
               labelPlacement="bottom"
               label="FreeDict"
             />
             <FormControlLabel
-              control={<Checkbox id="WordAPI" />}
+              control={<Checkbox defaultChecked id="WordAPI" />}
               labelPlacement="bottom"
               label="Word API"
             />
