@@ -64,7 +64,7 @@ const NavBar = () => {
               <img
                 src={logo}
                 style={{ height: "90px", margin: "0em 1em" }}
-                name="logo"
+                id="logo"
               />
             </ImageListItem>
 
