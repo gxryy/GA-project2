@@ -3,7 +3,6 @@ import Merriam from "./Merriam";
 import FreeDict from "./FreeDict";
 import WordAPI from "./WordAPI";
 import styled from "styled-components";
-// import soundLogo from "./sound.png";
 
 const Header = styled.div`
   background: lightblue;
@@ -61,10 +60,7 @@ const Results = (props) => {
         <Word>{props.word}</Word>
         <Phonetics>{phonetics.pronounciation}</Phonetics>
         <input type="button" value="Sound" onClick={playSound} />
-
-        {/* https://www.pngkey.com/png/full/507-5072429_sound-icon-png.png */}
       </Header>
-      <img src="sound.png" />
 
       {merriamList}
       {freeDictList}

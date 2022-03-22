@@ -51,6 +51,7 @@ const Example = styled.p`
 // wordType: string of wordtype
 // shortDef: an array of objects with definition and example(optional) as key [{definition: first definition },{definition: second definition, example: second example }]
 // dict: string of source
+// fullDef URL: string of the url for full definition
 // }
 
 const Card = (props) => {
@@ -65,12 +66,21 @@ const Card = (props) => {
     );
   });
 
+  const definitionHandler = () => {
+    let url = props.def.fullDef;
+    if (url) window.open(props.def.fullDef);
+  };
+
+  const addHandler = (event) => {
+    console.log(props.def);
+  };
+
   return (
-    <StyledDiv className="centered">
+    <StyledDiv className="centered" onClick={definitionHandler}>
       <InfoContainer>
         <Word> {props.def.word}</Word>
         <WordType>{props.def.wordType}</WordType>
-        {/* <input type="button" value="Add to my words" /> */}
+        <input type="button" value="Add to my words" onClick={addHandler} />
       </InfoContainer>
       <ol type="1">{definitionArray}</ol>
 

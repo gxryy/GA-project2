@@ -50,7 +50,7 @@ const WordAPI = (props) => {
 
   return (
     <div>
-      <h1>This is the return from Word API</h1>
+      <h3>Word API</h3>
       {processedArray.map((element) => {
         return <Card def={element} key={element.id} />;
       })}

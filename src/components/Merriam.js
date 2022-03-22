@@ -75,15 +75,16 @@ const Merriam = (props) => {
       const shortDef = filteredData[i].shortdef.map((element) => {
         return { definition: element };
       });
-
+      let word = filteredData[i].meta.id.split(":")[0];
       setProcessedArray((prevState) => [
         ...prevState,
         {
-          word: filteredData[i].meta.id.split(":")[0],
+          word: word,
           wordType: filteredData[i].fl,
           shortDef: shortDef,
           soundURL: soundURL,
           pronounciation: pronounciation,
+          fullDef: `https://www.merriam-webster.com/dictionary/${word}`,
           dict: "Merriam Webster",
           id: nanoid(),
         },
@@ -93,7 +94,7 @@ const Merriam = (props) => {
 
   return (
     <div>
-      <h1>merriam: </h1>
+      <h3>Merriam </h3>
       {processedArray.map((element) => {
         return <Card def={element} key={element.id} />;
       })}

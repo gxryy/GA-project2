@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import Results from "./components/Results";
 import NavBar from "./components/NavBar";
 import Suggestion_MW from "./components/Suggestion_MW";
+import MyWords from "./components/MyWords";
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -38,7 +39,8 @@ export default function App() {
             />
           }
         />
-        {/* <Route path="/myWords" element={<></>} /> */}
+
+        <Route path="/mywords" element={<MyWords />} />
       </Routes>
     </div>
   );
