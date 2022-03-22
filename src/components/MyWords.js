@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import Card from "./Card";
+import CardCreator from "./CardCreator";
 
 const MyWords = () => {
   //get array from local storage and display
@@ -19,7 +19,11 @@ const MyWords = () => {
       <div>
         {localWords.map((element) => {
           return (
-            <Card def={element} key={nanoid()} removeHandler={removeHandler} />
+            <CardCreator
+              def={element}
+              key={nanoid()}
+              removeHandler={removeHandler}
+            />
           );
         })}
       </div>

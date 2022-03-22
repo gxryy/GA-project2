@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FetchAPI from "./FetchAPI";
-import Card from "./Card";
+import CardCreator from "./CardCreator";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
 import keys from "../keys";
@@ -111,9 +111,14 @@ const Merriam = (props) => {
           <Typography>Merriam Webster</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={5}
+            justifyContent="space-evenly"
+            alignItems="center"
+          >
             {processedArray.map((element) => {
-              return <Card def={element} key={element.id} />;
+              return <CardCreator def={element} key={element.id} />;
             })}
           </Grid>
         </AccordionDetails>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FetchAPI from "./FetchAPI";
-import Card from "./Card";
+import CardCreator from "./CardCreator";
 import { nanoid } from "nanoid";
 import keys from "../keys";
 import {
@@ -35,7 +35,6 @@ const WordAPI = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(APIdata);
     if (APIdata) processData();
     else console.log(`no data from Word API`);
   }, [APIdata]);
@@ -65,9 +64,14 @@ const WordAPI = (props) => {
           <Typography>Word API</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Grid container spacing={2}>
+          <Grid
+            container
+            spacing={5}
+            justifyContent="space-evenly"
+            alignItems="center"
+          >
             {processedArray.map((element) => {
-              return <Card def={element} key={element.id} />;
+              return <CardCreator def={element} key={element.id} />;
             })}
           </Grid>
         </AccordionDetails>
