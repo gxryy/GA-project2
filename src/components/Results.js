@@ -57,7 +57,9 @@ const Results = (props) => {
             {props.word}
           </Typography>
           <Typography variant="h3"> {phonetics.pronounciation}</Typography>
-          <VolumeUpRoundedIcon onClick={playSound} fontSize="large" />
+          {phonetics.soundURL && (
+            <VolumeUpRoundedIcon onClick={playSound} fontSize="large" />
+          )}
         </Stack>
       </Container>
       <Container>
