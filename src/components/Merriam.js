@@ -45,6 +45,7 @@ const Merriam = (props) => {
     // allow 1 result if the filtering yields no results.
     if (filteredData.length == 0) filteredData[0] = APIdata[0];
 
+    console.log(APIdata);
     let soundURL = "";
     let pronounciation = "";
     // API object schema
@@ -65,6 +66,8 @@ const Merriam = (props) => {
       soundURL = "";
       pronounciation = "";
     }
+
+    props.setPhonetics({ pronounciation, soundURL });
 
     // parsing filtered data, and setting processed array state. Refer to API documentation and Card requirements.
     for (let i = 0; i < filteredData.length; i++) {

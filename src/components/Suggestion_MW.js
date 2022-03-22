@@ -11,6 +11,7 @@ const Suggestion_MW = (props) => {
     props.setSource({
       Merriam: true,
       FreeDict: true,
+      WordAPI: true,
     });
     navigate("/results");
   };

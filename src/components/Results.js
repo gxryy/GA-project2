@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Merriam from "./Merriam";
 import FreeDict from "./FreeDict";
 import WordAPI from "./WordAPI";
+import styled from "styled-components";
+// import soundLogo from "./sound.png";
+
+const Header = styled.div`
+  background: lightblue;
+`;
+const Word = styled.h1`
+  font-size: 4em;
+`;
+
+const Phonetics = styled.h2`
+  font-size: 2em;
+`;
 
 const Results = (props) => {
+  const [phonetics, setPhonetics] = useState({});
   let merriamList;
   let freeDictList;
   let WordAPIList;
@@ -16,6 +30,7 @@ const Results = (props) => {
       <Merriam
         word={props.word}
         setSuggestionArray={props.setSuggestionArray}
+        setPhonetics={setPhonetics}
       />
     );
   }
@@ -34,9 +49,23 @@ const Results = (props) => {
     WordAPIList = <WordAPI word={props.word} />;
   }
 
+  const playSound = () => {
+    // console.log(phonetics.soundURL);
+    let soundTrack = new Audio(phonetics.soundURL);
+    soundTrack.play();
+  };
+
   return (
     <div id="resultsPage">
-      <h1>This is the results page</h1>
+      <Header>
+        <Word>{props.word}</Word>
+        <Phonetics>{phonetics.pronounciation}</Phonetics>
+        <input type="button" value="Sound" onClick={playSound} />
+
+        {/* https://www.pngkey.com/png/full/507-5072429_sound-icon-png.png */}
+      </Header>
+      <img src="sound.png" />
+
       {merriamList}
       {freeDictList}
       {WordAPIList}
