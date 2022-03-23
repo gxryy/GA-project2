@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
+import BGContext from "./BGContext";
 import {
   Box,
   Drawer,
@@ -14,6 +15,7 @@ import {
   ListItemText,
   Toolbar,
   AppBar,
+  Container,
   Modal,
   Grid,
   TextField,
@@ -59,6 +61,7 @@ const MyBooks = (props) => {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [books, setBooks] = useLocalStorageState("books", { defaultValue: [] });
   const [display, setDisplay] = useState(null);
+  const imgCtx = useContext(BGContext);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -141,125 +144,144 @@ const MyBooks = (props) => {
 
   return (
     <>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <AppBar
-          className={classes.title}
-          position="fixed"
-          sx={{
-            // width: { md: `calc(100% - ${drawerWidth}px)` },
-            ml: { md: `${drawerWidth}px` },
-            zIndex: "1",
-          }}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { md: "none" } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              My Books
-            </Typography>
-          </Toolbar>
-        </AppBar>
-
-        <Box
-          component="nav"
-          sx={{
-            width: { sm: drawerWidth },
-            flexShrink: { sm: 0 },
-            zIndex: "0",
-          }}
-        >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Drawer
-            container={container}
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
+      <Box
+        className="App"
+        disableGutters
+        maxWidth="false"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${
+            imgCtx[Math.floor(Math.random()) * imgCtx.length]
+          })`,
+          backgroundAttachment: "fixed",
+          //   backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          //   overflow: "hidden",
+          minHeight: "100vh",
+        }}
+      >
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <AppBar
+            className={classes.title}
+            position="fixed"
             sx={{
-              display: { xs: "block", sm: "block", md: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-              },
+              // width: { md: `calc(100% - ${drawerWidth}px)` },
+              ml: { md: `${drawerWidth}px` },
+              zIndex: "1",
             }}
           >
-            {drawer}
-          </Drawer>
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: "none", sm: "none", md: "block" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-                marginTop: "90px",
-              },
-            }}
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Box>
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-          }}
-        >
-          <Toolbar />
-          <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Enter Book Title
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { md: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap component="div">
+                My Books
               </Typography>
-              <form onSubmit={addHandler}>
-                <TextField
-                  fullWidth
-                  autoFocus
-                  id="titleInput"
-                  label="Title"
-                  variant="outlined"
-                  size="medium"
-                  margin="normal"
-                ></TextField>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  endIcon={<ArrowForwardIosIcon />}
-                  sx={{ margin: "2em 0em" }}
-                >
-                  Add
-                </Button>
-              </form>
-            </Box>
-          </Modal>
-          <Grid
-            container
-            spacing={1}
-            justifyContent="space-around"
-            alignItems="center"
+            </Toolbar>
+          </AppBar>
+
+          <Box
+            component="nav"
+            sx={{
+              width: { sm: drawerWidth },
+              flexShrink: { sm: 0 },
+              zIndex: "0",
+            }}
           >
-            {display?.words.map((element) => (
-              <CardCreator
-                def={element}
-                key={nanoid()}
-                removeHandler={removeHandler}
-              />
-            ))}
-          </Grid>
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: "block", sm: "block", md: "none" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                },
+              }}
+            >
+              {drawer}
+            </Drawer>
+            <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: "none", sm: "none", md: "block" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                  marginTop: "90px",
+                },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Box>
+          <Box
+            component="main"
+            sx={{
+              flexGrow: 1,
+              p: 3,
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+              backgroundColor: "rgba(255,255,255,0)",
+            }}
+          >
+            <Toolbar />
+            <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Enter Book Title
+                </Typography>
+                <form onSubmit={addHandler}>
+                  <TextField
+                    fullWidth
+                    autoFocus
+                    id="titleInput"
+                    label="Title"
+                    variant="outlined"
+                    size="medium"
+                    margin="normal"
+                  ></TextField>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    endIcon={<ArrowForwardIosIcon />}
+                    sx={{ margin: "2em 0em" }}
+                  >
+                    Add
+                  </Button>
+                </form>
+              </Box>
+            </Modal>
+
+            <Grid
+              container
+              spacing={1}
+              justifyContent="space-around"
+              alignItems="center"
+            >
+              {display?.words.map((element) => (
+                <CardCreator
+                  def={element}
+                  key={nanoid()}
+                  removeHandler={removeHandler}
+                />
+              ))}
+            </Grid>
+          </Box>
         </Box>
       </Box>
     </>

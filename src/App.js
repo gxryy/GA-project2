@@ -48,7 +48,7 @@ export default function App() {
     console.log(APIdata);
     setImgArray(
       APIdata.map((element) => {
-        return element.urls.regular;
+        return element.urls.full;
       })
     );
   };

@@ -31,8 +31,11 @@ const Form = (props) => {
   };
 
   return (
-    <div
+    <Container
       className="App"
+      disableGutters
+      maxWidth="false"
+      height="100vh"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${
           imgCtx[Math.floor(Math.random()) * imgCtx.length]
@@ -40,8 +43,8 @@ const Form = (props) => {
         backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-
-        height: "100vh",
+        overflow: "hidden",
+        height: `calc(100vh - 80px)`,
       }}
     >
       <form onSubmit={submitHandler}>
@@ -94,7 +97,7 @@ const Form = (props) => {
           </Button>
         </Container>
       </form>
-    </div>
+    </Container>
   );
 };
 

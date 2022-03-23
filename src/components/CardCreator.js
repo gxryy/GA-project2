@@ -10,6 +10,7 @@ import {
   Grid,
   Paper,
   Menu,
+  Container,
   MenuItem,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
@@ -134,81 +135,93 @@ const CardCreator = (props) => {
   return (
     <>
       <Grid item>
-        <Paper>
-          <Card elevation={10} xs={12} md={8} lg={4} xl={4}>
-            <CardContent>
-              <Typography variant="h3" component="div">
-                {props.def.word}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} variant="h5" color="text.secondary">
-                {props.def.wordType}
-              </Typography>
-              <Paper style={{ maxHeight: 600, overflow: "auto" }} elevation={0}>
-                <ol type="1">{definitionArray}</ol>
-              </Paper>
-              <Typography variant="caption" align="left">
-                Source: {props.def.dict}
-              </Typography>
-            </CardContent>
-            <CardActions style={{ justifyContent: "center" }}>
-              {props.removeHandler ? (
-                <Button
-                  size="large"
-                  variant="outlined"
-                  onClick={() => props.removeHandler(props.def)}
-                >
-                  Remove
-                </Button>
-              ) : (
-                <Button
-                  size="large"
-                  variant="outlined"
-                  onClick={addHandler}
-                  disabled={buttonState}
-                >
-                  Add to My Words
-                </Button>
-              )}
-              {props.def.fullDef && (
-                <Button
-                  size="large"
-                  variant="outlined"
-                  onClick={definitionHandler}
-                >
-                  Learn More
-                </Button>
-              )}
+        <Card
+          elevation={10}
+          xs={12}
+          md={8}
+          lg={4}
+          xl={4}
+          sx={{ backgroundColor: "rgba(255,255,255,0.8)" }}
+        >
+          <CardContent>
+            <Typography variant="h3" component="div">
+              {props.def.word}
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} variant="h5" color="text.secondary">
+              {props.def.wordType}
+            </Typography>
+            <Container
+              style={{
+                maxHeight: 600,
+                overflow: "auto",
+                backgroundColor: "rgba(255,255,255,0)",
+              }}
+              elevation={0}
+            >
+              <ol type="1">{definitionArray}</ol>
+            </Container>
+            <Typography variant="caption" align="left">
+              Source: {props.def.dict}
+            </Typography>
+          </CardContent>
+          <CardActions style={{ justifyContent: "center" }}>
+            {props.removeHandler ? (
               <Button
-                id="demo-customized-button"
-                variant="outlined"
                 size="large"
-                disableElevation
-                onClick={(event) => setAnchorEl(event.currentTarget)}
-                endIcon={<KeyboardArrowDownIcon />}
+                variant="outlined"
+                onClick={() => props.removeHandler(props.def)}
               >
-                Add to
+                Remove
               </Button>
-              <StyledMenu
-                id="Add to"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={() => setAnchorEl(null)}
+            ) : (
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={addHandler}
+                disabled={buttonState}
               >
-                {books.map((book) => {
-                  return (
-                    <MenuItem
-                      onClick={(e) => handleAddToBook(e, book.id)}
-                      disableRipple
-                    >
-                      <CircleIcon style={{ color: book.color }} />
-                      {book.title}
-                    </MenuItem>
-                  );
-                })}
-              </StyledMenu>
-            </CardActions>
-          </Card>
-        </Paper>
+                Add to My Words
+              </Button>
+            )}
+            {props.def.fullDef && (
+              <Button
+                size="large"
+                variant="outlined"
+                onClick={definitionHandler}
+              >
+                Learn More
+              </Button>
+            )}
+            <Button
+              id="demo-customized-button"
+              variant="outlined"
+              size="large"
+              disableElevation
+              onClick={(event) => setAnchorEl(event.currentTarget)}
+              endIcon={<KeyboardArrowDownIcon />}
+            >
+              Add to
+            </Button>
+            <StyledMenu
+              id="Add to"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={() => setAnchorEl(null)}
+            >
+              {books.map((book) => {
+                return (
+                  <MenuItem
+                    onClick={(e) => handleAddToBook(e, book.id)}
+                    disableRipple
+                  >
+                    <CircleIcon style={{ color: book.color }} />
+                    {book.title}
+                  </MenuItem>
+                );
+              })}
+            </StyledMenu>
+          </CardActions>
+        </Card>
       </Grid>
     </>
   );
