@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { nanoid } from "nanoid";
 import {
@@ -14,8 +15,8 @@ import {
   Toolbar,
   AppBar,
   Modal,
+  Grid,
   TextField,
-  FormControl,
   Button,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -24,6 +25,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CircleIcon from "@mui/icons-material/Circle";
+import CardCreator from "./CardCreator";
 
 const drawerWidth = 240;
 
@@ -56,6 +58,7 @@ const MyBooks = (props) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [modalOpen, setModalOpen] = React.useState(false);
   const [books, setBooks] = useLocalStorageState("books", { defaultValue: [] });
+  const [display, setDisplay] = useState(null);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -77,6 +80,29 @@ const MyBooks = (props) => {
     setModalOpen(false);
   };
 
+  const selectedHandler = (event, book) => {
+    setDisplay(book);
+  };
+
+  useEffect(() => {
+    if (display) {
+      let bookIndex = books.findIndex((element) => element.id == display.id);
+      setDisplay(books[bookIndex]);
+    }
+  }, [books]);
+
+  const removeHandler = (def) => {
+    console.log(def.bookID);
+    let bookIndex = books.findIndex((element) => element.id == def.bookID);
+    let newWords = books[bookIndex].words.filter(
+      (wordDef) => wordDef.id != def.id
+    );
+    let newBooks = JSON.parse(JSON.stringify(books));
+    newBooks[bookIndex].words = newWords;
+    console.log(newBooks);
+    setBooks(newBooks);
+  };
+
   const drawer = (
     <div>
       <Toolbar />
@@ -91,7 +117,11 @@ const MyBooks = (props) => {
       <Divider />
       <List>
         {books.map((book, index) => (
-          <ListItem button key={nanoid()}>
+          <ListItem
+            button
+            key={nanoid()}
+            onClick={(e) => selectedHandler(e, book)}
+          >
             <ListItemIcon>
               <CircleIcon
                 sx={{
@@ -216,8 +246,20 @@ const MyBooks = (props) => {
               </form>
             </Box>
           </Modal>
-          <Typography paragraph>Some text here 1</Typography>
-          <Typography paragraph>Another para</Typography>
+          <Grid
+            container
+            spacing={1}
+            justifyContent="space-around"
+            alignItems="center"
+          >
+            {display?.words.map((element) => (
+              <CardCreator
+                def={element}
+                key={nanoid()}
+                removeHandler={removeHandler}
+              />
+            ))}
+          </Grid>
         </Box>
       </Box>
     </>

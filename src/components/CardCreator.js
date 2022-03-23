@@ -11,7 +11,6 @@ import {
   Paper,
   Menu,
   MenuItem,
-  Divider,
 } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -122,7 +121,8 @@ const CardCreator = (props) => {
       let book = prevState.find((element) => element.id == id);
       let index = prevState.findIndex((element) => element.id == id);
       console.log(book);
-      let newWords = [...book.words, props.def];
+      let newDef = { ...props.def, bookID: id };
+      let newWords = [...book.words, newDef];
       console.log(newWords);
       let newState = JSON.parse(JSON.stringify(prevState));
       newState[index].words = JSON.parse(JSON.stringify(newWords));
