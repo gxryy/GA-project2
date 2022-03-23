@@ -135,15 +135,7 @@ const CardCreator = (props) => {
     <>
       <Grid item>
         <Paper>
-          <Card
-            sx={{ width: 500 }}
-            // variant="outlined"
-            elevation={10}
-            xs={12}
-            md={6}
-            lg={4}
-            xl={4}
-          >
+          <Card elevation={10} xs={12} md={8} lg={4} xl={4}>
             <CardContent>
               <Typography variant="h3" component="div">
                 {props.def.word}
@@ -151,7 +143,9 @@ const CardCreator = (props) => {
               <Typography sx={{ mb: 1.5 }} variant="h5" color="text.secondary">
                 {props.def.wordType}
               </Typography>
-              <ol type="1">{definitionArray}</ol>
+              <Paper style={{ maxHeight: 600, overflow: "auto" }} elevation={0}>
+                <ol type="1">{definitionArray}</ol>
+              </Paper>
               <Typography variant="caption" align="left">
                 Source: {props.def.dict}
               </Typography>
@@ -186,10 +180,8 @@ const CardCreator = (props) => {
               )}
               <Button
                 id="demo-customized-button"
-                aria-controls={open ? "demo-customized-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                variant="contained"
+                variant="outlined"
+                size="large"
                 disableElevation
                 onClick={(event) => setAnchorEl(event.currentTarget)}
                 endIcon={<KeyboardArrowDownIcon />}
