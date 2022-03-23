@@ -50,7 +50,7 @@ const NavBar = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ marginBottom: "2em" }}>
+      <AppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <ImageListItem
