@@ -5,9 +5,24 @@ import Results from "./components/Results";
 import NavBar from "./components/NavBar";
 import Suggestion_MW from "./components/Suggestion_MW";
 import MyWords from "./components/MyWords";
+import MyBooks from "./components/MyBooks";
 import FetchAPI from "./components/FetchAPI";
 import keys from "./keys";
 import BGContext from "./components/BGContext";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { purple } from "@mui/material/colors";
+
+const theme = createTheme({
+  palette: {
+    primary: purple,
+    secondary: {
+      main: "#fefefe",
+    },
+  },
+  typography: {
+    fontFamily: "Quicksand,Roboto,Arial",
+  },
+});
 
 export default function App() {
   const [word, setWord] = useState("");
@@ -40,37 +55,40 @@ export default function App() {
 
   return (
     <BGContext.Provider value={imgArray}>
-      <div>
-        <NavBar></NavBar>
-        <Routes>
-          <Route
-            path="/"
-            element={<Form setWord={setWord} setSource={setSource} />}
-          />
-          <Route
-            path="/results"
-            element={
-              <Results
-                source={source}
-                word={word}
-                setSuggestionArray={setSuggestionArray}
-              />
-            }
-          />
-          <Route
-            path="/suggest"
-            element={
-              <Suggestion_MW
-                suggestionArray={suggestionArray}
-                setWord={setWord}
-                setSource={setSource}
-              />
-            }
-          />
+      <ThemeProvider theme={theme}>
+        <div>
+          <NavBar></NavBar>
+          <Routes>
+            <Route
+              path="/"
+              element={<Form setWord={setWord} setSource={setSource} />}
+            />
+            <Route
+              path="/results"
+              element={
+                <Results
+                  source={source}
+                  word={word}
+                  setSuggestionArray={setSuggestionArray}
+                />
+              }
+            />
+            <Route
+              path="/suggest"
+              element={
+                <Suggestion_MW
+                  suggestionArray={suggestionArray}
+                  setWord={setWord}
+                  setSource={setSource}
+                />
+              }
+            />
 
-          <Route path="/mywords" element={<MyWords />} />
-        </Routes>
-      </div>
+            <Route path="/mywords" element={<MyWords />} />
+            <Route path="/mybooks" element={<MyBooks />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
     </BGContext.Provider>
   );
 }

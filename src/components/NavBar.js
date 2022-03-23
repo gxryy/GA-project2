@@ -10,7 +10,6 @@ import {
   AppBar,
   Box,
   Menu,
-  SvgIcon,
   ImageListItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -50,7 +49,7 @@ const NavBar = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <ImageListItem
@@ -63,12 +62,19 @@ const NavBar = () => {
             >
               <img
                 src={logo}
-                style={{ height: "90px", margin: "0em 1em" }}
+                style={{ height: "80px", margin: "0em 1em" }}
                 id="logo"
               />
             </ImageListItem>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                height: "80px",
+              }}
+              // style={{ height: "10vv", margin: "0em 1em" }}
+            >
               <IconButton
                 size="large"
                 onClick={handleOpenNavMenu}

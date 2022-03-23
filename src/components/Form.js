@@ -19,6 +19,7 @@ const Form = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    console.log(`hello`);
     const form = event.target;
     props.setWord(form.searchBox.value);
     props.setSource({
@@ -43,7 +44,7 @@ const Form = (props) => {
         height: "100vh",
       }}
     >
-      <FormGroup onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         <Container
           maxWidth="sm"
           style={{
@@ -92,7 +93,7 @@ const Form = (props) => {
             Define
           </Button>
         </Container>
-      </FormGroup>
+      </form>
     </div>
   );
 };
