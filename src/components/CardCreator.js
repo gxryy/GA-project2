@@ -8,7 +8,6 @@ import {
   Button,
   Typography,
   Grid,
-  Paper,
   Menu,
   Container,
   MenuItem,
@@ -16,6 +15,8 @@ import {
 import { styled, alpha } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CircleIcon from "@mui/icons-material/Circle";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -101,15 +102,15 @@ const CardCreator = (props) => {
     // get local storage
     // push to local storage
 
-    const localMyWords = localStorage.getItem("myWords");
-    if (!localMyWords) {
-      localStorage.setItem("myWords", JSON.stringify([props.def]));
-      console.log(`no local storage. created mywords`);
+    const localFavourites = localStorage.getItem("favourites");
+    if (!localFavourites) {
+      localStorage.setItem("favourites", JSON.stringify([props.def]));
+      console.log(`no local storage. created favourites`);
     } else {
       console.log(`there is existing`);
-      const parsedLocal = JSON.parse(localMyWords);
-      parsedLocal.push(props.def);
-      localStorage.setItem("myWords", JSON.stringify(parsedLocal));
+      const parsedLocal = JSON.parse(localFavourites);
+      parsedLocal.unshift(props.def);
+      localStorage.setItem("favourites", JSON.stringify(parsedLocal));
       console.log(`added`);
     }
   };
@@ -170,6 +171,7 @@ const CardCreator = (props) => {
                 size="large"
                 variant="outlined"
                 onClick={() => props.removeHandler(props.def)}
+                endIcon={<DeleteIcon />}
               >
                 Remove
               </Button>
@@ -179,8 +181,9 @@ const CardCreator = (props) => {
                 variant="outlined"
                 onClick={addHandler}
                 disabled={buttonState}
+                endIcon={<FavoriteIcon />}
               >
-                Add to My Words
+                Favourite
               </Button>
             )}
             {props.def.fullDef && (

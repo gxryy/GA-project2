@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { nanoid } from "nanoid";
 import CardCreator from "./CardCreator";
-import { Container, Grid, Typography, Paper } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import BGContext from "./BGContext";
 
-const MyWords = () => {
+const Favourites = () => {
   //get array from local storage and display
-  const local = JSON.parse(localStorage.getItem("myWords"));
+  const local = JSON.parse(localStorage.getItem("favourites"));
   const [localWords, setLocalWords] = useState(local);
 
   const imgCtx = useContext(BGContext);
@@ -14,7 +14,7 @@ const MyWords = () => {
   const removeHandler = (element) => {
     const newList = localWords.filter((obj) => obj.id != element.id);
     setLocalWords(newList);
-    localStorage.setItem("myWords", JSON.stringify(newList));
+    localStorage.setItem("favourites", JSON.stringify(newList));
   };
 
   return (
@@ -40,7 +40,7 @@ const MyWords = () => {
           disableGutters
           maxWidth="false"
         >
-          <Typography variant="h1">My Words</Typography>
+          <Typography variant="h1">Favourites</Typography>
         </Container>
         <Container maxWidth="xl">
           <Grid
@@ -65,4 +65,4 @@ const MyWords = () => {
   );
 };
 
-export default MyWords;
+export default Favourites;

@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import {
   Toolbar,
   IconButton,
@@ -16,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "./logo_wb.png";
 
-const pages = ["Define", "My Words", "My Books"];
+const pages = ["Define", "Favourites", "My Books", "Random"];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,11 +34,14 @@ const NavBar = () => {
       case "Define":
         navigate("/");
         break;
-      case "My Words":
-        navigate("/mywords");
+      case "Favourites":
+        navigate("/favourites");
         break;
       case "My Books":
         navigate("/mybooks");
+        break;
+      case "Random":
+        navigate("/random");
         break;
       default:
         throw new Error("ERROR in Switch Case");

@@ -4,13 +4,14 @@ import Form from "./components/Form";
 import Results from "./components/Results";
 import NavBar from "./components/NavBar";
 import Suggestion_MW from "./components/Suggestion_MW";
-import MyWords from "./components/MyWords";
+import Favourites from "./components/Favourites";
 import MyBooks from "./components/MyBooks";
 import FetchAPI from "./components/FetchAPI";
 import keys from "./keys";
 import BGContext from "./components/BGContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { purple } from "@mui/material/colors";
+import Random from "./components/Random";
 
 const theme = createTheme({
   palette: {
@@ -35,7 +36,7 @@ export default function App() {
   );
 
   useEffect(() => {
-    const API_KEY = keys.unsplash1;
+    const API_KEY = keys.unsplash;
     const url = `https://api.unsplash.com/photos/random/?client_id=${API_KEY}&count=25&orientation=portrait `;
     FetchAPI(url, {}, setAPIData);
   }, []);
@@ -83,9 +84,9 @@ export default function App() {
                 />
               }
             />
-
-            <Route path="/mywords" element={<MyWords />} />
+            <Route path="/favourites" element={<Favourites />} />
             <Route path="/mybooks" element={<MyBooks />} />
+            <Route path="/random" element={<Random />} />s
           </Routes>
         </div>
       </ThemeProvider>
