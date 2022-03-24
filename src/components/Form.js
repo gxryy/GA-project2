@@ -19,7 +19,6 @@ const Form = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log(`hello`);
     const form = event.target;
     props.setWord(form.searchBox.value);
     props.setSource({

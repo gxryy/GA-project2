@@ -34,6 +34,7 @@ export default function App() {
   const [bgImage, setBgImage] = useState(
     "https://images.unsplash.com/photo-1519882189396-71f93cb4714b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwzMTI0MzN8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NDgwMDA4OTE&ixlib=rb-1.2.1&q=85"
   );
+  const [origin, setOrigin] = useState("user");
 
   useEffect(() => {
     const API_KEY = keys.unsplash;
@@ -46,7 +47,6 @@ export default function App() {
   }, [APIdata]);
 
   const processData = () => {
-    console.log(APIdata);
     setImgArray(
       APIdata.map((element) => {
         return element.urls.full;
@@ -70,7 +70,9 @@ export default function App() {
                 <Results
                   source={source}
                   word={word}
+                  setWord={setWord}
                   setSuggestionArray={setSuggestionArray}
+                  origin={origin}
                 />
               }
             />
@@ -86,7 +88,16 @@ export default function App() {
             />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/mybooks" element={<MyBooks />} />
-            <Route path="/random" element={<Random />} />s
+            <Route
+              path="/random"
+              element={
+                <Random
+                  setWord={setWord}
+                  setSource={setSource}
+                  setOrigin={setOrigin}
+                />
+              }
+            />
           </Routes>
         </div>
       </ThemeProvider>

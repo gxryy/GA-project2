@@ -34,6 +34,14 @@ const Merriam = (props) => {
     if (APIdata) processData();
   }, [APIdata]);
 
+  const randomHandler = () => {
+    const API_KEY = keys.MW;
+    let randomWord = APIdata[Math.floor(Math.random() * APIdata.length)];
+    props.setWord(randomWord);
+    let url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${API_KEY}`;
+    FetchAPI(url, {}, setAPIData);
+  };
+
   // function to destructure APIdata, process and parse required information to ensure consistent format with Card component.
   // processed information is stored in processedArray
   const processData = () => {
@@ -41,7 +49,7 @@ const Merriam = (props) => {
     // Upon receiving text array, set the lift the suggestion array and redirect to suggestion page.
     if (typeof APIdata[0] == "string") {
       props.setSuggestionArray(APIdata);
-      navigate("/suggest");
+      props.origin == "random" ? randomHandler() : navigate("/suggest");
       return;
     }
 

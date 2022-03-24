@@ -95,14 +95,12 @@ const MyBooks = (props) => {
   }, [books]);
 
   const removeHandler = (def) => {
-    console.log(def.bookID);
     let bookIndex = books.findIndex((element) => element.id == def.bookID);
     let newWords = books[bookIndex].words.filter(
       (wordDef) => wordDef.id != def.id
     );
     let newBooks = JSON.parse(JSON.stringify(books));
     newBooks[bookIndex].words = newWords;
-    console.log(newBooks);
     setBooks(newBooks);
   };
 

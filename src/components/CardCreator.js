@@ -105,13 +105,10 @@ const CardCreator = (props) => {
     const localFavourites = localStorage.getItem("favourites");
     if (!localFavourites) {
       localStorage.setItem("favourites", JSON.stringify([props.def]));
-      console.log(`no local storage. created favourites`);
     } else {
-      console.log(`there is existing`);
       const parsedLocal = JSON.parse(localFavourites);
       parsedLocal.unshift(props.def);
       localStorage.setItem("favourites", JSON.stringify(parsedLocal));
-      console.log(`added`);
     }
   };
 
@@ -122,10 +119,8 @@ const CardCreator = (props) => {
     setBooks((prevState) => {
       let book = prevState.find((element) => element.id == id);
       let index = prevState.findIndex((element) => element.id == id);
-      console.log(book);
       let newDef = { ...props.def, bookID: id };
       let newWords = [...book.words, newDef];
-      console.log(newWords);
       let newState = JSON.parse(JSON.stringify(prevState));
       newState[index].words = JSON.parse(JSON.stringify(newWords));
       return newState;

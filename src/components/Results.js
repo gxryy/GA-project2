@@ -23,7 +23,6 @@ const Results = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(APIdata);
     if (APIdata) setBG(APIdata[0].urls.full);
   }, [APIdata]);
 
@@ -36,6 +35,8 @@ const Results = (props) => {
         word={props.word}
         setSuggestionArray={props.setSuggestionArray}
         setPhonetics={setPhonetics}
+        origin={props.origin}
+        setWord={props.setWord}
       />
     );
   }
@@ -55,7 +56,6 @@ const Results = (props) => {
   }
 
   const playSound = () => {
-    // console.log(phonetics.soundURL);
     let soundTrack = new Audio(phonetics.soundURL);
     soundTrack.play();
   };
