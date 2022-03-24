@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Card,
   Grid,
@@ -13,6 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 import useLocalStorageState from "use-local-storage-state";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CardCreator from "./CardCreator";
+import BGContext from "./BGContext";
 
 const style = {
   position: "absolute",
@@ -27,26 +28,20 @@ const style = {
 };
 
 const MyWords = () => {
+  const imgCtx = useContext(BGContext);
+
   const [myWords, setMyWords] = useLocalStorageState("mywords", {
     defaultValue: [],
   });
   const [modalOpen, setModalOpen] = useState(false);
 
   const clickHandler = () => {
-    console.log(`in add handler`);
     setModalOpen(true);
-    // pop up modal to add word
   };
 
   const addHandler = (event) => {
     event.preventDefault();
     setModalOpen(false);
-
-    console.log(event.target);
-    console.log(event.target.wordInput.value);
-    console.log(event.target.wordTypeInput.value);
-    console.log(event.target.definitionInput.value);
-
     const def = {
       word: event.target.wordInput.value,
       wordType: event.target.wordTypeInput.value,
@@ -59,7 +54,21 @@ const MyWords = () => {
 
   return (
     <>
-      <Container>
+      <Box
+        className="App"
+        disableGutters
+        maxWidth="false"
+        height="100vh"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${
+            imgCtx[Math.floor(Math.random()) * imgCtx.length]
+          })`,
+          backgroundAttachment: "fixed",
+          // backgroundAttachment: "scroll",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <Grid
           container
           justifyContent="space-around"
@@ -150,7 +159,7 @@ const MyWords = () => {
             return <CardCreator def={word} />;
           })}
         </Grid>
-      </Container>
+      </Box>
     </>
   );
 };

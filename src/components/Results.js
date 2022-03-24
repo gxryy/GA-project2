@@ -66,13 +66,14 @@ const Results = (props) => {
         className="App"
         disableGutters
         maxWidth="false"
-        height="100vh"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${bg})`,
-          backgroundAttachment: "fixed",
-          // backgroundAttachment: "scroll",
+          // backgroundAttachment: "fixed",
+          backgroundAttachment: "scroll",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
+          overflow: "hidden",
+          height: "100vh",
         }}
       >
         <Container

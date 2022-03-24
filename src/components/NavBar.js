@@ -15,7 +15,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "./logo_wb.png";
 
-const pages = ["Define", "Favourites", "My Books", "My Words", "Random"];
+const pages = [
+  "Define",
+  "Favourites",
+  "My Books",
+  "My Words",
+  "Random",
+  "Quiz",
+];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -45,6 +52,9 @@ const NavBar = () => {
         break;
       case "Random":
         navigate("/random");
+        break;
+      case "Quiz":
+        navigate("/quiz");
         break;
       default:
         throw new Error("ERROR in Switch Case");
