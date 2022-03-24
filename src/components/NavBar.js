@@ -15,7 +15,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "./logo_wb.png";
 
-const pages = ["Define", "Favourites", "My Books", "Random"];
+const pages = ["Define", "Favourites", "My Books", "My Words", "Random"];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -39,6 +39,9 @@ const NavBar = () => {
         break;
       case "My Books":
         navigate("/mybooks");
+        break;
+      case "My Words":
+        navigate("/mywords");
         break;
       case "Random":
         navigate("/random");

@@ -67,7 +67,7 @@ const StyledMenu = styled((props) => (
 // wordType: string of wordtype
 // shortDef: an array of objects with definition and example(optional) as key [{definition: first definition },{definition: second definition, example: second example }]
 // dict: string of source
-// fullDef URL: string of the url for full definition
+// fullDef URL: string of the url for full definition (optional)
 // id: string as identifier
 // }
 

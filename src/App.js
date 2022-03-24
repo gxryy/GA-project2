@@ -12,6 +12,7 @@ import BGContext from "./components/BGContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { purple } from "@mui/material/colors";
 import Random from "./components/Random";
+import MyWords from "./components/MyWords";
 
 const theme = createTheme({
   palette: {
@@ -98,6 +99,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/mywords" element={<MyWords />} />
           </Routes>
         </div>
       </ThemeProvider>
