@@ -41,11 +41,20 @@ const MyWords = () => {
 
   const addHandler = (event) => {
     event.preventDefault();
+    console.log(event.target.definitionInput.value);
+    const inputdef = event.target.definitionInput.value;
+    let array = inputdef.split("\n");
+    let sd = [];
+    for (let i = 0; i < array.length; i++) {
+      sd.push({ definition: array[i] });
+    }
+
+    console.log(array);
     setModalOpen(false);
     const def = {
       word: event.target.wordInput.value,
       wordType: event.target.wordTypeInput.value,
-      shortDef: [{ definition: event.target.definitionInput.value }],
+      shortDef: sd,
       dict: "My Words",
     };
 
