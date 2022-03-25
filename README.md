@@ -1,4 +1,4 @@
-# Word Buddy
+# [Word Buddy](https://wordbuddy.netlify.app/)
 
 This app was developed for my General Assembly Software Engineering Immersive Project 2. Build using **React** and **Material UI**, Word Buddy is a simple front end app for users to lookup definitions of words/phrases across various sources.
 
@@ -111,3 +111,7 @@ Components used include Icons, Typography, Card, Button, Grid, Menu, AppBar, Mod
 - Edit / Delete book title
 - Edit / Delete book entries
 - Revamp of random word word generator.
+
+## Deployment
+
+[Word Buddy](https://wordbuddy.netlify.app/)
