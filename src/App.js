@@ -10,14 +10,14 @@ import FetchAPI from "./components/FetchAPI";
 import keys from "./keys";
 import BGContext from "./components/BGContext";
 import { createTheme, ThemeProvider } from "@mui/material";
-import { purple } from "@mui/material/colors";
+import { cyan } from "@mui/material/colors";
 import Random from "./components/Random";
 import MyWords from "./components/MyWords";
 import Quiz from "./components/Quiz";
 
 const theme = createTheme({
   palette: {
-    primary: purple,
+    primary: cyan,
     secondary: {
       main: "#fefefe",
     },

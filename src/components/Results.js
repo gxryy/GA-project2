@@ -72,7 +72,6 @@ const Results = (props) => {
           backgroundAttachment: "scroll",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          overflow: "hidden",
           height: "100vh",
         }}
       >
