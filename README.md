@@ -100,7 +100,6 @@ Components used include Icons, Typography, Card, Button, Grid, Menu, AppBar, Mod
 
 ## Known Issues
 
-- Unable to enter favourites page with no favourites
 - Background images do not load the full length of page
 
 ## Future Works

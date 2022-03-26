@@ -3,11 +3,13 @@ import { nanoid } from "nanoid";
 import CardCreator from "./CardCreator";
 import { Container, Grid, Typography } from "@mui/material";
 import BGContext from "./BGContext";
+import useLocalStorageState from "use-local-storage-state";
 
 const Favourites = () => {
   //get array from local storage and display
-  const local = JSON.parse(localStorage.getItem("favourites"));
-  const [localWords, setLocalWords] = useState(local);
+  const [localWords, setLocalWords] = useLocalStorageState("favourites", {
+    defaultValue: [],
+  });
 
   const imgCtx = useContext(BGContext);
 
