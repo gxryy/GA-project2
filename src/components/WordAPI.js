@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import FetchAPI from "./FetchAPI";
 import CardCreator from "./CardCreator";
 import { nanoid } from "nanoid";
-import keys from "../keys";
 import {
   Accordion,
   AccordionSummary,
@@ -18,7 +17,7 @@ const WordAPI = (props) => {
   const [processedArray, setProcessedArray] = useState([]);
 
   useEffect(() => {
-    const API_KEY = keys.WordAPI;
+    const API_KEY = process.env.REACT_APP_WordAPI_KEY;
     const url = `https://wordsapiv1.p.rapidapi.com/words/${props.word}`;
     const params = {
       method: "GET",

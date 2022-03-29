@@ -3,7 +3,6 @@ import FetchAPI from "./FetchAPI";
 import CardCreator from "./CardCreator";
 import { nanoid } from "nanoid";
 import { useNavigate } from "react-router-dom";
-import keys from "../keys";
 import {
   Accordion,
   AccordionSummary,
@@ -20,7 +19,7 @@ const Merriam = (props) => {
 
   // initiate API parameters on page load.
   useEffect(() => {
-    const API_KEY = keys.MW;
+    const API_KEY = process.env.REACT_APP_MW_KEY;
     const url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${props.word}?key=${API_KEY}`;
     FetchAPI(url, {}, setAPIData); //custom function that takes in url, fetch params, and lifting method.
 
@@ -35,7 +34,7 @@ const Merriam = (props) => {
   }, [APIdata]);
 
   const randomHandler = () => {
-    const API_KEY = keys.MW;
+    const API_KEY = process.env.REACT_APP_MW_KEY;
     let randomWord = APIdata[Math.floor(Math.random() * APIdata.length)];
     props.setWord(randomWord);
     let url = `https://dictionaryapi.com/api/v3/references/collegiate/json/${randomWord}?key=${API_KEY}`;

@@ -4,7 +4,6 @@ import FreeDict from "./FreeDict";
 import WordAPI from "./WordAPI";
 import { Typography, Container, Stack, Box } from "@mui/material";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
-import keys from "../keys";
 import FetchAPI from "./FetchAPI";
 
 const Results = (props) => {
@@ -17,7 +16,7 @@ const Results = (props) => {
   let WordAPIList;
 
   useEffect(() => {
-    const API_KEY = keys.unsplash;
+    const API_KEY = process.env.REACT_APP_unsplash_KEY;
     const url = `https://api.unsplash.com/photos/random/?client_id=${API_KEY}&count=1&orientation=portrait&query=${props.word} `;
     FetchAPI(url, {}, setAPIData);
   }, []);

@@ -24,3 +24,4 @@ yarn-error.log*
 APIs.txt
 keys.js
 backup.txt
+.env
